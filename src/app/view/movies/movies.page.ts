@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { MoviesService, SearchType } from 'src/app/services/movies.service';
 
 @Component({
@@ -9,21 +9,15 @@ import { MoviesService, SearchType } from 'src/app/services/movies.service';
 })
 export class MoviesPage implements OnInit {
   results! : Observable<any>;
-  searchTerms : string = 'fast'; 
+  searchTerms : string = ''; 
   type!: SearchType.all;
 
   constructor(private moviesService : MoviesService){}
 
-  ngOnInit() {
-    this.search();
-    console.log(this.results);
-  }
+  ngOnInit() {}
 
   search(){
     console.log(this.searchTerms);
-    this.results = this.moviesService.searchMovies(this.searchTerms, this.type);
-    this.results.subscribe(data => {
-      console.log(data)
-    })
+    this.results = this.moviesService.searchMovies(this.searchTerms, this.type).pipe(map(results1 => results1['Search']));
 }
 }

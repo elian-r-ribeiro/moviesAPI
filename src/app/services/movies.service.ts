@@ -19,7 +19,7 @@ export class MoviesService {
   constructor(private http: HttpClient){}
 
   searchMovies(title: string, type: SearchType): Observable<any>{
-    return this.http.get(`${this.url}?s={encondeURI(title)}&type=${type}&apikey=${this.apiKey}`);
+    return this.http.get(`${this.url}?s=${encodeURI(title)}&type=${type}&apikey=${this.apiKey}`);
   }
 
   searchDetailed(id: string){
