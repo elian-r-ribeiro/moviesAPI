@@ -22,7 +22,7 @@ export class MoviesService {
     return this.http.get(`${this.url}?s=${encodeURI(title)}&type=${type}&apikey=${this.apiKey}`);
   }
 
-  searchDetailed(id: string){
+  searchDetailed(id: any){
     return this.http.get(`${this.url}?i=${id}&plot=full&apikey=${this.apiKey}`)
   }
 }
